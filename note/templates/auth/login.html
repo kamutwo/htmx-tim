@@ -1,0 +1,26 @@
+{% macro input(name, value='', type='text', placeholder='') -%}
+<input
+  type="{{type}}"
+  name="{{name}}"
+  value="{{value}}"
+  placeholder="{{placeholder}}"
+  class="outline-none"
+/>
+{%- endmacro %} {% extends 'base.html' %} {% block children %}
+<main class="flex justify-center items-center h-screen">
+  <form
+    hx-post="token"
+    class="flex flex-col gap-4 p-4 rounded-md container-style"
+  >
+    {{ input("username", placeholder="Username") }} {{ input("password",
+    placeholder="Password") }}
+
+    <button
+      type="submit"
+      class="rounded-md hover:bg-[#29262d] cursor-pointer transition-colors"
+    >
+      Submit
+    </button>
+  </form>
+</main>
+{% endblock %}

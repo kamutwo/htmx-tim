@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% block children %}
+<main class="flex h-screen overflow-hidden">
+  <section
+    id="notes"
+    hx-boost="true"
+    hx-target="#noteView"
+    hx-select="#noteView"
+    hx-swap="outerHTML"
+    class="flex flex-col items-center w-full h-full"
+  >
+    <div
+      class="flex justify-between py-2 px-4 w-full border-b-2 border-[#242228]"
+    >
+      <h1 class="text-xl font-bold">My Notes</h1>
+      <a href="?new">Add Note</a>
+    </div>
+    <div class="flex flex-col gap-2 p-4 w-full overflow-y-auto">
+      {% for note in notes %}
+      <a
+        href="?v={{note.id}}"
+        class="py-2 px-4 rounded-md container-style hover:bg-[#27242b] hover:border-[#2c2a31]"
+      >
+        <p class="font-semibold">{{note.title}}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  <section
+    id="noteView"
+    hx-boost="true"
+    class="w-full h-full border-l-2 border-[#242228]"
+  >
+    <form
+      {%
+      if
+      existingNote
+      %}
+      hx-put="/notes"
+      hx-vals='{"id": "{{existingNote.id}}"}'
+      {%
+      else
+      %}
+      hx-post="/notes"
+      {%
+      endif
+      %}
+      hx-select-oob="#notes, #noteView"
+      hx-swap="outerHTML"
+      class="flex flex-col gap-4 p-4"
+    >
+      {% include 'main/notes/form.html' %}
+    </form>
+  </section>
+</main>
+{% endblock %}

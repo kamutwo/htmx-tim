@@ -1,0 +1,28 @@
+<input
+  type="text"
+  name="title"
+  placeholder="New Note"
+  value="{{ existingNote.title }}"
+  class="p-2 rounded-md outline-none border border-[#242228]"
+/>
+<textarea
+  name="content"
+  class="p-2 rounded-md outline-none border border-[#242228]"
+>
+{{ existingNote.content }}</textarea
+>
+<span>
+  <button
+    class="p-2 rounded-md border border-[#242228] hover:bg-[#29262d] cursor-pointer transition-colors"
+  >
+    {{ "Update" if existingNote else "Create" }}
+  </button>
+  {% if existingNote %}
+  <button
+    hx-delete="/notes/?v={{ existingNote.id }}"
+    class="p-2 rounded-md border border-[#242228] hover:bg-[#29262d] cursor-pointer transition-colors"
+  >
+    Delete
+  </button>
+  {% endif %}
+</span>
