@@ -55,6 +55,9 @@ cover/
 *.mo
 *.pot
 
+# Intellisense
+tailwind.config.js
+
 # Django stuff:
 *.log
 local_settings.py
